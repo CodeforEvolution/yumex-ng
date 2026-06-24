@@ -16,7 +16,7 @@ import dbus.mainloop.glib
 import dbus.service
 from gi.repository import GLib
 
-from yumex.constants import BACKEND, LOCALEDIR
+from yumex.constants import LOCALEDIR
 from yumex.service.data import Config, Indicator, Updates, open_yumex
 
 gettext.install("yumex", LOCALEDIR)
@@ -58,7 +58,7 @@ def refresh_updates(refresh: bool) -> None:
 
     logger.debug(f" --> flatpak system : {updates.flatpak_sys_count}")
     logger.debug(f" --> flatpak user   : {updates.flatpak_user_count}")
-    logger.debug(f" --> {BACKEND}   : {updates.sys_update_count}")
+    logger.debug(f" --> DNF5   : {updates.sys_update_count}")
 
     hover_text_lines = ["There are updates available:"]
     noti_body = ""

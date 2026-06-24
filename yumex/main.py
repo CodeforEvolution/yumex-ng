@@ -23,7 +23,7 @@ from traceback import format_exception
 
 from gi.repository import Adw, Gio, Gtk
 
-from yumex.constants import APP_ID, BACKEND, BUILD_TYPE, ROOTDIR, VERSION
+from yumex.constants import APP_ID, BUILD_TYPE, ROOTDIR, VERSION
 from yumex.ui.error_dialog import YumexErrorDialog
 from yumex.ui.preferences import YumexPreferences
 from yumex.ui.window import YumexMainWindow
@@ -130,7 +130,7 @@ class YumexApplication(Adw.Application):
         self.args: Namespace = parser.parse_args(command_line.get_arguments()[1:])
         setup_logging(debug=self.args.debug)
         # global is_local
-        logger.debug(f"Version:  {VERSION} ({BACKEND})")
+        logger.debug(f"Version:  {VERSION}")
         logger.debug(f"executable : {command_line.get_arguments()[0]}")
         logger.debug(f"commmand-line : {self.args}")
         self.activate()
@@ -168,7 +168,7 @@ class YumexApplication(Adw.Application):
             translator_credits="",
             copyright="© 2025 Tim Lauridsen",
             license_type=Gtk.License.GPL_3_0,
-            version=f"{VERSION} ({BACKEND})",
+            version=f"{VERSION}",
             release_notes_version=VERSION,
             release_notes="""
             <ul>

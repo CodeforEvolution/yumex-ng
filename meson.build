@@ -5,7 +5,6 @@ project(
 )
 
 APPLICATION_ID = 'dk.yumex.Yumex'
-BACKEND = get_option('dnf_backend')
 
 # Import modules
 gnome = import('gnome')

@@ -17,7 +17,6 @@ configure_file(
             'BUILD_TYPE': get_option('buildtype'),
             'PKGDATA_DIR': PKGDATA_DIR,
             'LOCALE_DIR': conf.get('LOCALE_DIR'),
-            'BACKEND': BACKEND,
         },
     ),
     install: true,
