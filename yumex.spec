@@ -39,7 +39,7 @@ Provides: yumex-dnf5 = %{version}-%{release}
 Obsoletes: yumex-dnf5 < %{version}-%{release}
 
 %description
-Graphical package tool for maintain packages on the system
+Graphical package tool for maintain packages on the system.
 
 %package -n %{name}-updater
 Summary:  Yum Extender updater app
@@ -56,14 +56,16 @@ Provides: yumex-updater-systray = %{version}-%{release}
 Obsoletes: yumex-updater-systray < %{version}-%{release}
 
 %description -n %{name}-updater
-Service to check and notify about available updates
+Daemon to check and notify about available updates.
 
 %prep
-%setup -q
+%autosetup
 
 %check
-appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.metainfo.xml
+appstream-util validate-relax --nonet %{buildroot}/%{_metainfodir}/%{app_id}.metainfo.xml
 desktop-file-validate %{buildroot}/%{_datadir}/applications/%{app_id}.desktop
+desktop-file-validate %{buildroot}/%{_datadir}/applications/%{app_id}-flatpakref.desktop
+desktop-file-validate %{buildroot}/%{_datadir}/applications/%{app_id}-rpm.desktop
 
 %build
 %meson --buildtype=%{app_build}
@@ -74,46 +76,23 @@ desktop-file-validate %{buildroot}/%{_datadir}/applications/%{app_id}.desktop
 
 %find_lang %{name}
 
-%post
-/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-glib-compile-schemas /usr/share/glib-2.0/schemas/ &>/dev/null || :
-
-%post -n %{name}-updater
-%systemd_user_post  %{name}-updater.service
-
-%postun
-if [ $1 -eq 0 ] ; then
-    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-fi
-
-%postun -n %{name}-updater
-if [ $1 -eq 0 ] ; then
-    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-fi
-%systemd_user_postun_with_restart %{name}-updater.service
-%systemd_user_postun_with_reload %{name}-updater.service
-%systemd_user_postun %{name}-updater.service
-
-%preun -n %{name}-updater
-%systemd_user_preun %{name}-updater.service
-
 %files -f  %{name}.lang
 %doc README.md
 %license LICENSE
 %{_datadir}/%{name}/
 %{_bindir}/%{name}
 %{python3_sitelib}/%{name}/
-%{_datadir}/applications/%{app_id}*.desktop
-%{_datadir}/icons/hicolor/scalable/apps/dk.yumex.Yumex.svg
+%{_datadir}/applications/%{app_id}.desktop
+%{_datadir}/applications/%{app_id}-flatpakref.desktop
+%{_datadir}/applications/%{app_id}-rpm.desktop
+%{_datadir}/icons/hicolor/scalable/apps/%{app_id}.svg
 %{_metainfodir}/%{app_id}.metainfo.xml
 %{_datadir}/glib-2.0/schemas/%{app_id}.gschema.xml
 
 %files -n %{name}-updater
 %{_userunitdir}/%{name}-updater.service
-%{_libexecdir}/yumex-updater
-%{_datadir}/icons/hicolor/scalable/apps/yumex-update-*.svg
+%{_libexecdir}/%{name}-updater
+%{_datadir}/icons/hicolor/scalable/apps/%{name}-update-*.svg
 
 %changelog
 %autochangelog
