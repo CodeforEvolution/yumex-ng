@@ -22,7 +22,7 @@ from yumex.service.data import Config, Indicator, Updates, open_yumex
 gettext.install("yumex", LOCALEDIR)
 locale.bindtextdomain("yumex", LOCALEDIR)
 locale.textdomain("yumex")
-logger = logging.getLogger("yumex_updater")
+logger = logging.getLogger("yumex-updater")
 
 def setup_logging():
     # Setup logger

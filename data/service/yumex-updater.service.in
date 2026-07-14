@@ -5,10 +5,9 @@ After=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/yumex_updater
+ExecStart=@LIBEXECDIR@/yumex-updater
 RestartSec=5
 Restart=on-failure
 
 [Install]
 WantedBy=graphical-session.target
-

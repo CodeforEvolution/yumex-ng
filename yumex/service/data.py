@@ -29,7 +29,7 @@ gi.require_version("Flatpak", "1.0")
 
 from gi.repository import AppIndicator3, Flatpak, Gio, Gtk  # type: ignore  # noqa: E402
 
-logger = logging.getLogger("yumex_updater")
+logger = logging.getLogger("yumex-updater")
 
 
 def open_yumex(action="", pkgs=0, flatpaks=0):

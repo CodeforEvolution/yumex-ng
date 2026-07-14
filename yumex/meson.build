@@ -24,7 +24,7 @@ configure_file(
     install_dir: PY_INSTALLDIR.get_install_dir() / 'yumex',
 )
 
-install_data('yumex_updater', install_dir: get_option('bindir'))
+install_data('yumex-updater', install_dir: get_option('libexecdir'))
 
 launcher = join_paths(meson.project_build_root(), 'yumex', 'local-' + meson.project_name())
 

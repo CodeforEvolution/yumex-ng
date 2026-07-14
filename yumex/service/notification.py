@@ -12,7 +12,7 @@ from gi.repository import GLib
 
 DBusGMainLoop(set_as_default=True)
 
-logger = logging.getLogger("yumex_updater")
+logger = logging.getLogger("yumex-updater")
 
 
 NOTIFICATION_BUS_NAME = "org.freedesktop.Notifications"

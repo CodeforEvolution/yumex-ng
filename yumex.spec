@@ -112,8 +112,7 @@ fi
 
 %files -n %{name}-updater
 %{_userunitdir}/%{name}-updater.service
-%{_prefix}/lib/systemd/user-preset/*%{name}-updater.preset
-%{_bindir}/yumex_updater
+%{_libexecdir}/yumex-updater
 %{_datadir}/icons/hicolor/scalable/apps/yumex-update-*.svg
 
 %changelog

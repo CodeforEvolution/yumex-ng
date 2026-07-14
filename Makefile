@@ -126,7 +126,7 @@ inst-deps:
 potfiles:
 	@echo "updating po/POTFILES with *.py, .in & *.blp files"
 	@find yumex -iname *.py > po/POTFILES
-	@find yumex -iname yumex_updater_systray >> po/POTFILES
+	@find yumex -iname yumex-updater >> po/POTFILES
 	@find data -iname *.blp >> po/POTFILES
 	@find data -iname *.in.in >> po/POTFILES
 
@@ -147,7 +147,7 @@ transifex-get:
 run-updater:
 	@systemctl --user stop yumex-updater.service
 	@$(MAKE) localbuild
-	@-./builddir/bin/yumex_updater
+	@-./builddir/bin/yumex-updater
 
 # dnf5 install python3-memray
 memray-updater:
@@ -156,7 +156,7 @@ memray-updater:
 	@-mkdir -p profile
 	@-rm profile/output.bin
 	@-rm profile/memray-flamegraph-output.html
-	@-python3 -m memray run -o profile/output.bin ./builddir/bin/yumex_updater_systray
+	@-python3 -m memray run -o profile/output.bin ./builddir/bin/yumex-updater
 	@-python3 -m memray flamegraph profile/output.bin
 
 # dnf5 install python3-memray
@@ -164,7 +164,7 @@ memray-updater-live:
 	@-systemctl --user stop yumex-updater.service
 	@$(MAKE) localbuild
 	@-mkdir -p profile
-	@-python3 -m memray run --live ./builddir/bin/yumex_updater_systray
+	@-python3 -m memray run --live ./builddir/bin/yumex-updater
 
 
 upstream_rpms: clean

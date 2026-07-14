@@ -1,23 +1,23 @@
 prefixdir = get_option('prefix')
 userunitdir = prefixdir / 'lib/systemd/user'
-userpresetdir = prefixdir / 'lib/systemd/user-preset'
+libexecdir = prefixdir / get_option('libexecdir')
 summary(
     {
         'prefixdir': prefixdir,
         'userunitdir': userunitdir,
-        'userpresetdir': userpresetdir,
-
+        'libexecdir': libexecdir
     },
 )
 
-# Install systemd service file
-install_data(
-    'yumex-updater.service',
+# Configure and install Systemd service file
+configure_file(
+    input: 'yumex-updater.service.in',
+    output: 'yumex-updater.service',
+    configuration: configuration_data(
+        {
+            'LIBEXECDIR': libexecdir,
+        },
+    ),
+    install: true,
     install_dir: userunitdir,
-)
-
-# Install systemd preset file
-install_data(
-    '50-yumex-updater.preset',
-    install_dir: userpresetdir,
 )
