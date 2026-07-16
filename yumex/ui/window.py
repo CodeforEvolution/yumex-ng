@@ -47,7 +47,6 @@ class YumexMainWindow(Adw.ApplicationWindow):
     __gtype_name__ = "YumexMainWindow"
 
     content_packages = Gtk.Template.Child()
-    clamp_packages = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
     main_view = Gtk.Template.Child()
     content_groups = Gtk.Template.Child()
@@ -161,10 +160,6 @@ class YumexMainWindow(Adw.ApplicationWindow):
         for setting in PACKAGE_COLUMNS:
             width = self.settings.get_int(f"col-{setting}-width")
             getattr(self.package_view, f"{setting}s").set_fixed_width(width)
-        # set the package page clamp width
-        clamp_width = self.settings.get_int("window-width")
-        self.clamp_packages.set_maximum_size(clamp_width)
-        self.clamp_packages.set_tightening_threshold(clamp_width - 100)
         self.package_paned.set_position(self.settings.get_int("pkg-paned-pos"))
 
     def on_queue_refresh(self, *args):

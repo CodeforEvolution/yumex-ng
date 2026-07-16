@@ -127,36 +127,30 @@ template $YumexMainWindow: Adw.ApplicationWindow {
               collapsed: true;
 
               [content]
-              Adw.Clamp clamp_packages {
-                maximum-size: 1024;
+              Gtk.Frame {
+                margin-top: 20;
+                margin-bottom: 20;
+                margin-start: 10;
+                margin-end: 10;
 
-                Gtk.Frame {
-                  margin-top: 20;
-                  margin-bottom: 20;
-                  margin-start: 10;
-                  margin-end: 10;
+                Gtk.Paned package_paned {
+                  orientation: vertical;
+                  wide-handle: true;
 
-                  Gtk.Paned package_paned {
-                    orientation: vertical;
-                    wide-handle: true;
+                  Gtk.ScrolledWindow content_packages {
+                    styles [
+                      "package_list",
+                    ]
 
-                    Gtk.ScrolledWindow content_packages {
-                      styles [
-                        "package_list",
-                      ]
+                    hexpand: true;
+                    vexpand: true;
+                    // package_view is added here
+                  }
 
-                      hexpand: true;
-                      vexpand: true;
-                      // package_view is added here
-                    }
-
-                    Gtk.ScrolledWindow content_desc {
-                      Gtk.Box {
-                        orientation: vertical;
-
-                        Gtk.Box update_info_box {
-                          // package_info is added her
-                        }
+                  Gtk.ScrolledWindow content_desc {
+                    Adw.Bin {
+                      Gtk.Box update_info_box {
+                        // package_info is added her
                       }
                     }
                   }
@@ -170,59 +164,55 @@ template $YumexMainWindow: Adw.ApplicationWindow {
             title: _("Flatpaks");
             icon-name: "insert-object-symbolic";
 
-            child: Adw.Clamp {
-              maximum-size: 1024;
+            child: Gtk.Frame {
+              margin-top: 20;
+              margin-bottom: 20;
+              margin-start: 10;
+              margin-end: 10;
 
-              Gtk.Frame {
-                margin-top: 20;
-                margin-bottom: 20;
-                margin-start: 10;
-                margin-end: 10;
+              Gtk.Box {
+                orientation: vertical;
 
-                Gtk.Box {
-                  orientation: vertical;
+                Gtk.ScrolledWindow content_flatpaks {
+                  // flatpak_view is added here
+                }
 
-                  Gtk.ScrolledWindow content_flatpaks {
-                    // flatpak_view is added here
+                Gtk.ActionBar {
+                  Gtk.Button flatpak_update_all {
+                    sensitive: false;
+                    icon-name: "software-update-available-symbolic";
+                    action-name: "app.flatpak_update";
+                    tooltip-text: _("Update All Flatpaks (Apps & Runtimes)");
                   }
 
-                  Gtk.ActionBar {
-                    Gtk.Button flatpak_update_all {
-                      sensitive: false;
-                      icon-name: "software-update-available-symbolic";
-                      action-name: "app.flatpak_update";
-                      tooltip-text: _("Update All Flatpaks (Apps & Runtimes)");
-                    }
+                  Gtk.Button {
+                    icon-name: "edit-find-symbolic";
+                    action-name: "app.flatpak_search";
+                    tooltip-text: _("search for new flatpak to install");
+                  }
 
-                    Gtk.Button {
-                      icon-name: "edit-find-symbolic";
-                      action-name: "app.flatpak_search";
-                      tooltip-text: _("search for new flatpak to install");
-                    }
+                  Gtk.Button {
+                    icon-name: "edit-delete-symbolic";
+                    action-name: "app.flatpak_remove";
+                    tooltip-text: _("uninstall selected flatpak");
+                  }
 
-                    Gtk.Button {
-                      icon-name: "edit-delete-symbolic";
-                      action-name: "app.flatpak_remove";
-                      tooltip-text: _("uninstall selected flatpak");
-                    }
+                  Gtk.Button {
+                    icon-name: "user-trash-full-symbolic";
+                    action-name: "app.flatpak_remove_unused";
+                    tooltip-text: _("Remove unused flatpaks (runtimes etc.)");
+                  }
 
-                    Gtk.Button {
-                      icon-name: "user-trash-full-symbolic";
-                      action-name: "app.flatpak_remove_unused";
-                      tooltip-text: _("Remove unused flatpaks (runtimes etc.)");
-                    }
+                  Gtk.Separator {
+                    styles [
+                      "spacer",
+                    ]
+                  }
 
-                    Gtk.Separator {
-                      styles [
-                        "spacer",
-                      ]
-                    }
-
-                    Gtk.ToggleButton {
-                      icon-name: "library-symbolic";
-                      action-name: "app.flatpak_runtime";
-                      tooltip-text: _("show/hide runtimes");
-                    }
+                  Gtk.ToggleButton {
+                    icon-name: "library-symbolic";
+                    action-name: "app.flatpak_runtime";
+                    tooltip-text: _("show/hide runtimes");
                   }
                 }
               }
@@ -245,31 +235,25 @@ template $YumexMainWindow: Adw.ApplicationWindow {
             title: _("Queue");
             icon-name: "test-pass-symbolic";
 
-            child: Gtk.Box {
-              orientation: vertical;
+            child: Adw.Bin {
+              Gtk.Frame {
+                margin-top: 20;
+                margin-bottom: 20;
+                margin-start: 10;
+                margin-end: 10;
 
-              Adw.Clamp {
-                maximum-size: 1024;
+                Gtk.Box {
+                  orientation: vertical;
 
-                Gtk.Frame {
-                  margin-top: 20;
-                  margin-bottom: 20;
-                  margin-start: 10;
-                  margin-end: 10;
+                  Gtk.ScrolledWindow content_queue {
+                    // queue_view is added here
+                  }
 
-                  Gtk.Box {
-                    orientation: vertical;
-
-                    Gtk.ScrolledWindow content_queue {
-                      // queue_view is added here
-                    }
-
-                    Gtk.ActionBar {
-                      Gtk.Button {
-                        icon-name: "edit-undo-symbolic";
-                        action-name: "app.clear_queue";
-                        tooltip-text: _("Remove all from queue");
-                      }
+                  Gtk.ActionBar {
+                    Gtk.Button {
+                      icon-name: "edit-undo-symbolic";
+                      action-name: "app.clear_queue";
+                      tooltip-text: _("Remove all from queue");
                     }
                   }
                 }
