@@ -602,7 +602,6 @@ class YumexMainWindow(Adw.ApplicationWindow):
         # entry = self.search_bar.get_child()
         # entry.set_text("")
         pkg_filter = PackageFilter(pkg_filter)
-        self.sidebar.set_show_sidebar(False)
         self.search_bar.set_search_mode(False)
         self.search_entry.delete_text(0, -1)
         self.package_view.get_packages(pkg_filter)
@@ -614,14 +613,12 @@ class YumexMainWindow(Adw.ApplicationWindow):
         self.info_type = info_type
         pkg = self._last_selected_pkg
         self.set_pkg_info(pkg, refresh=True)
-        self.sidebar.set_show_sidebar(False)
 
     def on_sort_attr_changed(self, widget, sort_attr: str):
         sort_attr = SortType(sort_attr)
         logger.debug(f"SIGNAL: sort-attr-changed : {sort_attr}")
         self.package_view.sort(sort_attr)
         self.package_view.refresh()
-        self.sidebar.set_show_sidebar(False)
 
     def set_needs_attention(self, page: Page, num: int):
         """set the page needs_attention state"""
