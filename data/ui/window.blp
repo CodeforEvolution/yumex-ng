@@ -121,7 +121,7 @@ template $YumexMainWindow: Adw.ApplicationWindow {
           Adw.ViewStackPage packages_page {
             name: "packages";
             title: _("Packages");
-            icon-name: "flatpak-symbolic";
+            icon-name: "package-x-generic-symbolic";
 
             child: Adw.OverlaySplitView sidebar {
               [content]
@@ -160,7 +160,7 @@ template $YumexMainWindow: Adw.ApplicationWindow {
           Adw.ViewStackPage flatpaks_page {
             name: "flatpaks";
             title: _("Flatpaks");
-            icon-name: "insert-object-symbolic";
+            icon-name: "flatpak-symbolic";
 
             child: Gtk.Frame {
               margin-top: 20;
