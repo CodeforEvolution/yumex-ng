@@ -37,8 +37,8 @@ class YumexPackageSettings(Gtk.Box):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.current_pkg_filter: PackageFilter|None = None
-        self.previuos_pkg_filter: PackageFilter|None = None
+        self.current_pkg_filter: PackageFilter | None = None
+        self.previous_pkg_filter: PackageFilter | None = None
 
     def set_focus(self):
         """Set focus on the settings sidebar."""
@@ -58,7 +58,7 @@ class YumexPackageSettings(Gtk.Box):
 
     def unselect_all(self):
         """Unselect all filters, so we can re-select one"""
-        self.previuos_pkg_filter = None
+        self.previous_pkg_filter = None
         self.filter_available.set_active(False)
         self.filter_installed.set_active(False)
         self.filter_updates.set_active(False)
@@ -78,8 +78,8 @@ class YumexPackageSettings(Gtk.Box):
         """handler for package filter changes"""
         pkg_filter: PackageFilter = PackageFilter(button.get_name())
         self.current_pkg_filter = pkg_filter
-        if self.current_pkg_filter != self.previuos_pkg_filter:
-            self.previuos_pkg_filter = pkg_filter
+        if self.current_pkg_filter != self.previous_pkg_filter:
+            self.previous_pkg_filter = pkg_filter
             logger.debug(f"SIGNAL: emit package-filter-changed: {pkg_filter}")
             self.emit("package-filter-changed", pkg_filter)
 

@@ -74,7 +74,7 @@ class YumexMainWindow(Adw.ApplicationWindow):
         self.app = kwargs["application"]
         self.settings = Gio.Settings.new(APP_ID)
         self.current_pkg_filer = None
-        self.previuos_pkg_filer = None
+        self.previous_pkg_filer = None
         self._last_selected_pkg: Optional[YumexPackage] = None
         self.info_type: InfoType = InfoType.DESCRIPTION
         self._last_filter: PackageFilter | None = None
