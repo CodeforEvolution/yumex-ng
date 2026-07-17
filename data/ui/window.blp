@@ -146,9 +146,11 @@ template $YumexMainWindow: Adw.ApplicationWindow {
                   }
 
                   Gtk.ScrolledWindow content_desc {
-                    Adw.Bin {
-                      Gtk.Box update_info_box {
-                        // package_info is added her
+                    Gtk.Box {
+                      orientation: vertical;
+
+                      Gtk.Box package_info_box {
+                        // package_info is added here
                       }
                     }
                   }

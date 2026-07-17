@@ -60,7 +60,7 @@ class YumexMainWindow(Adw.ApplicationWindow):
     search_entry: Gtk.SearchEntry = Gtk.Template.Child()
     sidebar_button = Gtk.Template.Child("sidebar-button")
     package_paned = Gtk.Template.Child()
-    update_info_box = Gtk.Template.Child()
+    package_info_box = Gtk.Template.Child()
     apply_button = Gtk.Template.Child()
     packages_page = Gtk.Template.Child()
     queue_page = Gtk.Template.Child()
@@ -151,7 +151,7 @@ class YumexMainWindow(Adw.ApplicationWindow):
         self.sidebar.set_sidebar(self.package_settings)
         # setup package info
         self.package_info = YumexPackageInfo()
-        self.update_info_box.append(self.package_info)
+        self.package_info_box.append(self.package_info)
 
         # self.search_entry.connect("move-focus", lambda _: True)
 

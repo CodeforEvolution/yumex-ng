@@ -40,7 +40,7 @@ class YumexPackageInfo(Gtk.Box):
     info = Gtk.Template.Child()
     desc = Gtk.Template.Child()
     description_grp = Gtk.Template.Child()
-    update_info_grp = Gtk.Template.Child()
+    package_info_grp = Gtk.Template.Child()
     ref_grp = Gtk.Template.Child()
     references = Gtk.Template.Child()
 
@@ -76,7 +76,7 @@ class YumexPackageInfo(Gtk.Box):
 
     def write_update(self, info):
         self.add_update_info(info)
-        self.update_info_grp.set_visible(True)
+        self.package_info_grp.set_visible(True)
         self.description_grp.set_visible(False)
 
     def write_text(self, txt):
@@ -84,7 +84,7 @@ class YumexPackageInfo(Gtk.Box):
             txt = ""
         txt = html.escape(txt)
         self.info.set_title(txt)
-        self.update_info_grp.set_visible(False)
+        self.package_info_grp.set_visible(False)
         self.description_grp.set_visible(True)
 
     def add_update_info(self, pkg_info):
