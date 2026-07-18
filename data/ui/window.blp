@@ -159,26 +159,32 @@ template $YumexMainWindow: Adw.ApplicationWindow {
 
                         Adw.Toggle {
                           label: _("Description");
+                          icon-name: "info-outline-symbolic";
                         }
 
                         Adw.Toggle {
                           label: _("Filelist");
+                          icon-name: "search-harddrive-symbolic";
                         }
 
                         Adw.Toggle {
                           label: _("Update Info");
+                          icon-name: "up-arrow-in-a-star-symbolic";
                         }
 
                         Adw.Toggle {
                           label: _("Provides");
+                          icon-name: "extract-symbolic";
                         }
 
                         Adw.Toggle {
                           label: _("Requires");
+                          icon-name: "resources-symbolic";
                         }
 
                         Adw.Toggle {
                           label: _("Changelog");
+                          icon-name: "history-undo-symbolic";
                         }
                       }
 
@@ -213,7 +219,7 @@ template $YumexMainWindow: Adw.ApplicationWindow {
                 Gtk.ActionBar {
                   Gtk.Button flatpak_update_all {
                     sensitive: false;
-                    icon-name: "software-update-available-symbolic";
+                    icon-name: "up-arrow-in-a-star-symbolic";
                     action-name: "app.flatpak_update";
                     tooltip-text: _("Update All Flatpaks (Apps & Runtimes)");
                   }

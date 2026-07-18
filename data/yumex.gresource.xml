@@ -30,6 +30,11 @@
         <file preprocess="xml-stripblanks">icons/scalable/actions/library-symbolic.svg</file>
         <file preprocess="xml-stripblanks">icons/scalable/actions/view-sort-descending-rtl-symbolic.svg</file>
         <file preprocess="xml-stripblanks">icons/scalable/actions/package-x-generic-symbolic.svg</file>
+        <file preprocess="xml-stripblanks">icons/scalable/actions/info-outline-symbolic.svg</file>
+        <file preprocess="xml-stripblanks">icons/scalable/actions/search-harddrive-symbolic.svg</file>
+        <file preprocess="xml-stripblanks">icons/scalable/actions/up-arrow-in-a-star-symbolic.svg</file>
+        <file preprocess="xml-stripblanks">icons/scalable/actions/history-undo-symbolic.svg</file>
+        <file preprocess="xml-stripblanks">icons/scalable/actions/extract-symbolic.svg</file>
         <file>style.css</file>
     </gresource>
 </gresources>
