@@ -108,22 +108,6 @@ template $YumexPackageSettings: Gtk.Box {
         tooltip-text: _("Select what attribute to sort by");
       }
     }
-
-    Adw.ComboRow info_type {
-      model: info_types;
-
-      styles [
-        "sorting-row",
-      ]
-
-      notify::selected => $on_info_type_selected();
-
-      [prefix]
-      Gtk.Image show_icon {
-        icon-name: "diagnostics-symbolic";
-        tooltip-text: _("Select what package information to show");
-      }
-    }
   }
 }
 
@@ -133,16 +117,5 @@ Gtk.StringList sort_attr {
     _("Arch"),
     _("Size"),
     _("Repo"),
-  ]
-}
-
-Gtk.StringList info_types {
-  strings [
-    _("Description"),
-    _("Filelist"),
-    _("Update Info"),
-    _("Provides"),
-    _("Requires"),
-    _("Changelog"),
   ]
 }

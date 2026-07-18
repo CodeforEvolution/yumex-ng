@@ -148,6 +148,39 @@ template $YumexMainWindow: Adw.ApplicationWindow {
                   Gtk.ScrolledWindow content_desc {
                     Gtk.Box {
                       orientation: vertical;
+                      margin-top: 20;
+                      margin-bottom: 20;
+                      margin-start: 10;
+                      margin-end: 10;
+
+                      Adw.ToggleGroup package_info_type_toggle {
+                        tooltip-text: _("Select what package information to show");
+                        notify::active => $on_package_info_type_toggle_active();
+
+                        Adw.Toggle {
+                          label: _("Description");
+                        }
+
+                        Adw.Toggle {
+                          label: _("Filelist");
+                        }
+
+                        Adw.Toggle {
+                          label: _("Update Info");
+                        }
+
+                        Adw.Toggle {
+                          label: _("Provides");
+                        }
+
+                        Adw.Toggle {
+                          label: _("Requires");
+                        }
+
+                        Adw.Toggle {
+                          label: _("Changelog");
+                        }
+                      }
 
                       Gtk.Box package_info_box {
                         // package_info is added here

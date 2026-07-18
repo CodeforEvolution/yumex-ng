@@ -6,7 +6,6 @@ import pytest
 
 import yumex.utils
 from yumex.utils.enums import (
-    InfoType,
     PackageFilter,
     SortType,
 )
@@ -42,7 +41,6 @@ def mock_win():
     mock = MagicMock()
     # mock the package_setting method call by YumexPackageView
     mock.package_settings.get_sort_attr.return_value = SortType.NAME
-    mock.package_settings.get_info_type.return_value = InfoType.DESCRIPTION
     return mock
 
 

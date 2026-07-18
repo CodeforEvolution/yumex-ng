@@ -12,12 +12,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 # Copyright (C) 2025 Tim Lauridsen
+# Copyright (C) 2026 Jacob Secunda
 
 import logging
 from pathlib import Path
 from typing import Optional
 
-from gi.repository import Adw, Gio, Gtk
+from gi.repository import Adw, Gio, GObject, Gtk
 
 from yumex.backend import TransactionResult
 from yumex.backend.dnf import TransactionOptions, YumexPackage
@@ -60,6 +61,7 @@ class YumexMainWindow(Adw.ApplicationWindow):
     search_entry: Gtk.SearchEntry = Gtk.Template.Child()
     sidebar_button = Gtk.Template.Child("sidebar-button")
     package_paned = Gtk.Template.Child()
+    package_info_type_toggle = Gtk.Template.Child()
     package_info_box = Gtk.Template.Child()
     apply_button = Gtk.Template.Child()
     packages_page = Gtk.Template.Child()
@@ -146,9 +148,10 @@ class YumexMainWindow(Adw.ApplicationWindow):
         # setup package settings
         self.package_settings = YumexPackageSettings()
         self.package_settings.connect("package-filter-changed", self.on_package_filter_changed)
-        self.package_settings.connect("info-type-changed", self.on_info_type_changed)
         self.package_settings.connect("sort-attr-changed", self.on_sort_attr_changed)
         self.sidebar.set_sidebar(self.package_settings)
+        # setup package info type toggle
+        self.connect("info-type-changed", self.on_info_type_changed)
         # setup package info
         self.package_info = YumexPackageInfo()
         self.package_info_box.append(self.package_info)
@@ -607,12 +610,33 @@ class YumexMainWindow(Adw.ApplicationWindow):
         self.package_view.get_packages(pkg_filter)
         self._update_package_menu(pkg_filter)
 
+    # Package Info Type
+
+    def get_info_type(self) -> InfoType:
+        """get the current info type"""
+        selected = self.package_info_type_toggle.get_active()
+        return list(InfoType)[selected]
+
+    @Gtk.Template.Callback()
+    def on_package_info_type_toggle_active(self, widget, data):
+        """capture the notify for when the active property is changed"""
+        info_type = self.get_info_type()
+        logger.debug(f"SIGNAL: emit info-type-changed: {info_type}")
+        self.emit("info-type-changed", info_type)
+
     def on_info_type_changed(self, widget, info_type: str):
         info_type = InfoType(info_type)
         logger.debug(f"SIGNAL: info-type-changed : {info_type}")
         self.info_type = info_type
         pkg = self._last_selected_pkg
         self.set_pkg_info(pkg, refresh=True)
+
+    @GObject.Signal(arg_types=(str,))
+    def info_type_changed(self, info_type: InfoType):
+        """signal emitted when a info type is changed"""
+        pass
+
+    # End Package Info Type
 
     def on_sort_attr_changed(self, widget, sort_attr: str):
         sort_attr = SortType(sort_attr)

@@ -18,7 +18,7 @@ import logging
 from gi.repository import Adw, GObject, Gtk
 
 from yumex.constants import ROOTDIR
-from yumex.utils.enums import InfoType, PackageFilter, SortType
+from yumex.utils.enums import PackageFilter, SortType
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +32,6 @@ class YumexPackageSettings(Gtk.Box):
     filter_updates: Gtk.CheckButton = Gtk.Template.Child()
     filter_search: Gtk.CheckButton = Gtk.Template.Child()
     sort_by: Adw.ComboRow = Gtk.Template.Child()
-    info_type: Adw.ComboRow = Gtk.Template.Child()
     installed_row: Adw.ActionRow = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
@@ -64,11 +63,6 @@ class YumexPackageSettings(Gtk.Box):
         self.filter_updates.set_active(False)
         self.filter_search.set_active(True)
 
-    def get_info_type(self) -> InfoType:
-        """get the current info type"""
-        selected = self.info_type.get_selected()
-        return list(InfoType)[selected]
-
     def get_sort_attr(self) -> SortType:
         """get the current sort attribute"""
         selected = self.sort_by.get_selected()
@@ -82,13 +76,6 @@ class YumexPackageSettings(Gtk.Box):
             self.previous_pkg_filter = pkg_filter
             logger.debug(f"SIGNAL: emit package-filter-changed: {pkg_filter}")
             self.emit("package-filter-changed", pkg_filter)
-
-    @Gtk.Template.Callback()
-    def on_info_type_selected(self, widget, data):
-        """capture the Notify for the selected property is changed"""
-        info_type = self.get_info_type()
-        logger.debug(f"SIGNAL: emit info-type-changed: {info_type}")
-        self.emit("info-type-changed", info_type)
 
     @Gtk.Template.Callback()
     def on_sort_by_selected(self, widget, data):
@@ -106,9 +93,4 @@ class YumexPackageSettings(Gtk.Box):
     @GObject.Signal(arg_types=(str,))
     def sort_attr_changed(self, sort_attr: SortType):
         """signal emitted when a sort attribute is changed"""
-        pass
-
-    @GObject.Signal(arg_types=(str,))
-    def info_type_changed(self, info_type: InfoType):
-        """signal emitted when a info type is changed"""
         pass
